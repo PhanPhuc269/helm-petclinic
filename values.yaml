@@ -24,6 +24,7 @@ dependOnEureka: &dependOnEureka
 
 services:
   config-server:
+    enable: true
     ports:
       port: 8888
       targetPort: 8888
@@ -31,6 +32,7 @@ services:
       name: spring-petclinic-config-server
 
   discovery-server:
+    enable: true
     ports:
       port: 8761
       targetPort: 8761
@@ -43,6 +45,7 @@ services:
       port: 8888
 
   admin-server:
+    enable: true
     ports:
       port: 9090
       targetPort: 9090
@@ -53,6 +56,7 @@ services:
     dependOn: *dependOnEureka
 
   customers-service:
+    enable: true
     ports:
       port: 8081
       targetPort: 8081
@@ -63,6 +67,7 @@ services:
     dependOn: *dependOnEureka
 
   visits-service:
+    enable: true
     ports:
       port: 8082
       targetPort: 8082
@@ -73,6 +78,7 @@ services:
     dependOn: *dependOnEureka
 
   vets-service:
+    enable: true
     ports:
       port: 8083
       targetPort: 8083
@@ -83,6 +89,7 @@ services:
     dependOn: *dependOnEureka
 
   api-gateway:
+    enable: true
     ports:
       port: 8080
       targetPort: 8080
