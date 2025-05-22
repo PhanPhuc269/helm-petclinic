@@ -5,28 +5,28 @@ imageTag: &tag v1.2.3
 services:
   config-server:
     image:
-      tag: *tag
+      tag: v1.2.6
 
   discovery-server:
     image:
-      tag: *tag
+      tag: v1.2.6
 
   admin-server:
     image:
-      tag: *tag
+      tag: v1.2.6
 
   customers-service:
     image:
-      tag: *tag
+      tag: v1.2.6
 
   visits-service:
     image:
-      tag: *tag
+      tag: v1.2.6
 
   vets-service:
     image:
-      tag: *tag
+      tag: v1.2.6
 
   api-gateway:
     image:
-      tag: *tag
+      tag: v1.2.6
