@@ -5,6 +5,8 @@ metadata:
   namespace: {{ .Values.namespace }}
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/x-forwarded-prefix: "/"
+
 spec:
   ingressClassName: nginx
   rules:
