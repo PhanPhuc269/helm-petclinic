@@ -13,6 +13,7 @@ spec:
       values: |
         controller:
           config:
+            forward-headers-strategy: native
             use-forwarded-headers: "true"
           service:
             type: NodePort
