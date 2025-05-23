@@ -35,11 +35,15 @@ spec:
           imagePullPolicy: "{{ $.Values.imagePullPolicy | default "Always"}}"
           ports:
             - containerPort: {{ $service.ports.targetPort | default 0 }}
-          {{- if $service.env }}
           env:
-            {{- toYaml $service.env | nindent 12 }}
+            {{- with $service.env }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
             - name: EUREKA_INSTANCE_HOSTNAME
               value: {{ $name }}
-          {{- end }}
+            {{- if eq $name "admin-server" }}
+            - name: SPRING_BOOT_ADMIN_PUBLIC_URL
+              value: "https://admin.{{ $.Values.namespace }}-{{ $.Values.ingress.host }}:{{ $.Values.ingress.httpsNodePort }}/"
+            {{- end }}
 ---
 {{- end }}
