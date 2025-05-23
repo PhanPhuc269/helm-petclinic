@@ -15,7 +15,6 @@ spec:
           config:
             use-forwarded-headers: "true"
           service:
-            # type: LoadBalancer
             type: NodePort
             nodePorts:
               http: 32080
