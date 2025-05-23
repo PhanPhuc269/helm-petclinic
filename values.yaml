@@ -54,8 +54,6 @@ services:
     image:
       name: spring-petclinic-admin-server
     env: 
-      - name: SPRING_BOOT_ADMIN_PUBLIC_URL
-        value: "https://admin.{{ $.Values.namespace }}-{{ $.Values.ingress.host }}:{{ $.Values.ingress.httpNodePort }}/"
       - *configServerEnv
     dependOn: *dependOnEureka
 
