@@ -32,3 +32,5 @@ services:
   api-gateway:
     image:
       tag: 56ff5e8
+
+
