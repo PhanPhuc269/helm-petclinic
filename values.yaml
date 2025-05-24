@@ -7,8 +7,7 @@ docker:
 ingress:
   name: spring-petclinic-ingress
   host: petclinic.phanphuc.id.vn
-  httpNodePort: 32080
-  httpsNodePort: 32443
+  httpNodePort: 30303
   userServiceName: api-gateway
   userServicePort: 8080
   adminServiceName: admin-server
