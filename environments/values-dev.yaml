@@ -3,31 +3,31 @@ namespace: dev
 services:
   config-server:
     image:
-      tag: c008b11
+      tag: latest
 
   discovery-server:
     image:
-      tag: c008b11
+      tag: latest
 
   admin-server:
     image:
-      tag: c008b11
+      tag: latest
 
   customers-service:
     image:
-      tag: c008b11
+      tag: latest
 
   visits-service:
     image:
-      tag: c008b11
+      tag: latest
 
   vets-service:
     image:
-      tag: c008b11
+      tag: latest
 
   genai-service:
     image:
-      tag: c008b11
+      tag: latest
 
   api-gateway:
     image:
