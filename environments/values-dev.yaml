@@ -56,4 +56,4 @@ services:
       port: 8080
       targetPort: 8080
     image:
-      tag: 5105330
+      tag: latest
