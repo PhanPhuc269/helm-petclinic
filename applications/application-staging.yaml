@@ -7,17 +7,17 @@ spec:
   project: default
 
   source:
-    repoURL: 'https://github.com/phanphuc269/helm-petclinic.git' # Replace with your Git repository URL
-    targetRevision: HEAD                # Replace with the branch or tag to deploy
-    path: .        # Path to the Helm chart in the repository
+    repoURL: 'https://github.com/phanphuc269/helm-petclinic.git' 
+    targetRevision: HEAD                
+    path: .        
     helm:
       valueFiles:
-        - values.yaml                   # Default values
-        - environments/values-staging.yaml  # Dev-specific overrides
+        - values.yaml                   
+        - environments/values-staging.yaml  
 
   destination:
-    server: 'https://kubernetes.default.svc' # Kubernetes cluster API server
-    namespace: staging                          # Namespace for the dev environment
+    server: 'https://kubernetes.default.svc' 
+    namespace: staging                         
 
   syncPolicy:
     syncOptions:
