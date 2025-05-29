@@ -7,7 +7,7 @@ services:
       port: 8888
       targetPort: 8888
     image:
-      tag: latest
+      tag: 339b054
 
   discovery-server:
     enable: true
@@ -15,7 +15,7 @@ services:
       port: 8761
       targetPort: 8761
     image:
-      tag: latest
+      tag: 339b054
 
   admin-server:
     enable: true
@@ -23,7 +23,7 @@ services:
       port: 9090
       targetPort: 9090
     image:
-      tag: latest
+      tag: 339b054
 
 
   customers-service:
@@ -32,7 +32,7 @@ services:
       port: 8081
       targetPort: 8081
     image:
-      tag: latest
+      tag: 339b054
 
   visits-service:
     enable: true
@@ -40,7 +40,7 @@ services:
       port: 8082
       targetPort: 8082
     image:
-      tag: latest
+      tag: 339b054
 
   vets-service:
     enable: true
@@ -48,7 +48,7 @@ services:
       port: 8083
       targetPort: 8083
     image:
-      tag: latest
+      tag: 339b054
 
   api-gateway:
     enable: true
@@ -56,4 +56,4 @@ services:
       port: 8080
       targetPort: 8080
     image:
-      tag: latest
+      tag: 339b054
