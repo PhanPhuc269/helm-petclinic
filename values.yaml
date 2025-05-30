@@ -21,7 +21,7 @@ configServerEnv: &configServerEnv
 
 zipkinEnv: &zipkinEnv
   name: ZIPKIN_BASE_URL
-  value: http://zipkin.monitoring:9411
+  value: http://zipkin.monitoring:9411/api/v2/spans
 
 dependOnEureka: &dependOnEureka
   name: discovery-server
