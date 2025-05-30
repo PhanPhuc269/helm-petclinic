@@ -15,7 +15,7 @@ services:
       port: 8761
       targetPort: 8761
     image:
-      tag: 339b054
+      tag: f24ef6e
 
   admin-server:
     enable: true
