@@ -6,6 +6,10 @@ metadata:
   labels:
     app: {{ $name }}
   namespace: {{ $.Values.namespace }}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/actuator/prometheus"
+    prometheus.io/port: "{{ $service.ports.port }}"
 spec:
   type: {{ $service.type | default "ClusterIP" }}   # Default to ClusterIP if not set in values.yaml
   selector:
