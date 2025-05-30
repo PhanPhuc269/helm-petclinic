@@ -11,11 +11,12 @@ spec:
     targetRevision: 25.21.0
     helm:
       values: |
-        ingress:
-          enabled: true
-          hosts:
-            - prometheus.phanphuc.id.vn
-          ingressClassName: nginx
+        server:
+          ingress:
+            enabled: true
+            hosts:
+              - prometheus.phanphuc.id.vn
+            ingressClassName: nginx
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
