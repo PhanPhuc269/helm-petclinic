@@ -9,6 +9,15 @@ spec:
     repoURL: https://grafana.github.io/helm-charts
     chart: grafana
     targetRevision: 7.3.11
+    helm:
+      values: |
+        ingress:
+          enabled: true
+          hosts:
+            - grafana.phanphuc.id.vn
+          ingressClassName: nginx
+          path: /
+          pathType: Prefix
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

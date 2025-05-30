@@ -9,6 +9,13 @@ spec:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: prometheus
     targetRevision: 25.21.0
+    helm:
+      values: |
+        ingress:
+          enabled: true
+          hosts:
+            - prometheus.phanphuc.id.vn
+          ingressClassName: nginx
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
