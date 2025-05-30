@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: zipkin
-    targetRevision: 3.5.1
+    targetRevision: 5.1.2   # <-- Sửa version này cho đúng
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

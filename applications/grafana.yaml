@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: zipkin
+  name: grafana
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://charts.bitnami.com/bitnami
-    chart: zipkin
-    targetRevision: 5.1.2   # <-- Sửa version này cho đúng
+    repoURL: https://grafana.github.io/helm-charts
+    chart: grafana
+    targetRevision: 7.3.11
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
