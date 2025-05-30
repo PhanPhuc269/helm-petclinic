@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://openzipkin.github.io/zipkin
+    repoURL: https://charts.bitnami.com/bitnami
     chart: zipkin
-    targetRevision: 0.1.5
+    targetRevision: 3.5.1
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
