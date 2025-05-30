@@ -19,6 +19,10 @@ configServerEnv: &configServerEnv
   name: CONFIG_SERVER_URL
   value: http://config-server:8888
 
+zipkinEnv: &zipkinEnv
+  name: ZIPKIN_BASE_URL
+  value: http://zipkin.argocd:9411
+
 dependOnEureka: &dependOnEureka
   name: discovery-server
   port: 8761
@@ -30,6 +34,8 @@ services:
       targetPort: 8888
     image:
       name: spring-petclinic-config-server
+    env:
+      - *zipkinEnv
 
   discovery-server:
     ports:
@@ -39,6 +45,7 @@ services:
       name: spring-petclinic-discovery-server
     env: 
       - *configServerEnv
+      - *zipkinEnv
     dependOn: 
       name: config-server
       port: 8888
@@ -51,6 +58,7 @@ services:
       name: spring-petclinic-admin-server
     env: 
       - *configServerEnv
+      - *zipkinEnv
     dependOn: *dependOnEureka
 
   customers-service:
@@ -61,6 +69,7 @@ services:
       name: spring-petclinic-customers-service
     env: 
       - *configServerEnv
+      - *zipkinEnv
     dependOn: *dependOnEureka
 
   visits-service:
@@ -71,6 +80,7 @@ services:
       name: spring-petclinic-visits-service
     env: 
       - *configServerEnv
+      - *zipkinEnv
     dependOn: *dependOnEureka
 
   vets-service:
@@ -81,6 +91,7 @@ services:
       name: spring-petclinic-vets-service
     env: 
       - *configServerEnv
+      - *zipkinEnv
     dependOn: *dependOnEureka
 
   api-gateway:
@@ -91,4 +102,5 @@ services:
       name: spring-petclinic-api-gateway
     env: 
       - *configServerEnv
+      - *zipkinEnv
     dependOn: *dependOnEureka
