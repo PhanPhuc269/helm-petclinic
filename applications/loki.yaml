@@ -13,6 +13,8 @@ spec:
       values: |
         grafana:
           enabled: false
+        promtail:
+          enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
