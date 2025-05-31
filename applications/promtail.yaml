@@ -13,6 +13,7 @@ spec:
       values: |
         loki:
           serviceName: loki
+          namespace: monitoring
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
