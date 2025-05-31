@@ -18,6 +18,16 @@ spec:
           ingressClassName: nginx
           path: /
           pathType: Prefix
+        datasources:
+          datasources.yaml:
+            apiVersion: 1
+            datasources:
+              - name: Loki
+                type: loki
+                access: proxy
+                url: http://loki.monitoring:3100
+                isDefault: false
+                editable: true
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
