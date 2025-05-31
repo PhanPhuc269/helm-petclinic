@@ -14,7 +14,10 @@ spec:
         grafana:
           enabled: false
         promtail:
-          enabled: false
+          enabled: true
+          config:
+            clients:
+              - url: http://loki.monitoring:3100/loki/api/v1/push
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
