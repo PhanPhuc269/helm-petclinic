@@ -11,9 +11,9 @@ spec:
     targetRevision: 6.15.5   # kiểm tra version mới nhất trên https://artifacthub.io/packages/helm/grafana/promtail
     helm:
       values: |
-        loki:
-          serviceName: loki
-          namespace: monitoring
+        config:
+          clients:
+            - url: http://loki.monitoring:3100/loki/api/v1/push
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
