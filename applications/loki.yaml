@@ -21,7 +21,7 @@ spec:
         loki:
           service:
             type: NodePort
-          servicePort: 32002
+            nodePort: 32002
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
