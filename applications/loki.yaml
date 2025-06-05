@@ -18,10 +18,6 @@ spec:
           config:
             clients:
               - url: http://loki.monitoring:3100/loki/api/v1/push
-        loki:
-          service:
-            type: NodePort
-            nodePort: 32002
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
