@@ -18,6 +18,9 @@ spec:
           ingressClassName: nginx
           path: /
           pathType: Prefix
+        service:
+          type: NodePort
+          nodePort: 32000
         datasources:
           datasources.yaml:
             apiVersion: 1

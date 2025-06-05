@@ -17,6 +17,9 @@ spec:
             hosts:
               - prometheus.phanphuc.id.vn
             ingressClassName: nginx
+          service:
+            type: NodePort
+            nodePort: 32001
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
