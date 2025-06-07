@@ -20,6 +20,18 @@ spec:
           service:
             type: NodePort
             nodePort: 32001
+          serverFiles:
+            prometheus.yml:
+              scrape_configs:
+                - job_name: 'petclinic'
+                  metrics_path: '/actuator/prometheus'
+                  static_configs:
+                    - targets:
+                        - 'api-gateway:8080'
+                        - 'customers-service:8081'
+                        - 'visits-service:8082'
+                        - 'vets-service:8083'
+                        - 'admin-server:9090'
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
