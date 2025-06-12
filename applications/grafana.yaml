@@ -31,6 +31,29 @@ spec:
                 url: http://loki.monitoring:3100
                 isDefault: false
                 editable: true
+              - name: Prometheus
+                type: prometheus
+                access: proxy
+                url: http://prometheus.monitoring
+                isDefault: true
+                editable: true
+        dashboardProviders:
+          dashboardproviders.yaml:
+            apiVersion: 1
+            providers:
+              - name: 'default'
+                orgId: 1
+                folder: ''
+                type: file
+                disableDeletion: false
+                updateIntervalSeconds: 10
+                options:
+                  path: /var/lib/grafana/dashboards
+
+        dashboards:
+          default:
+            petclinic-dashboard:
+              file: dashboards/grafana-petclinic-dashboard.json
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
