@@ -34,7 +34,7 @@ spec:
               - name: Prometheus
                 type: prometheus
                 access: proxy
-                url: http://prometheus.monitoring
+                url: http://prometheus-server.monitoring:80
                 isDefault: true
                 editable: true
         dashboardProviders:
@@ -53,7 +53,7 @@ spec:
         dashboards:
           default:
             petclinic-dashboard:
-              file: dashboards/grafana-petclinic-dashboard.json
+              file: applications/dashboards/grafana-petclinic-dashboard.json
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
