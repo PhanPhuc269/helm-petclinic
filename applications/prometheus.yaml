@@ -32,9 +32,8 @@ spec:
                         - 'visits-service:8082'
                         - 'vets-service:8083'
                         - 'admin-server:9090'
-              rule_files:
-                - /etc/config/alerting_rules.yml
-            alerting_rules.yml: |-
+          additionalPrometheusRulesMap:
+            petclinic-alert-rules:
               groups:
                 - name: request_error_alerts
                   interval: 30s
