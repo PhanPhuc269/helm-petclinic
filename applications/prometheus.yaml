@@ -32,6 +32,8 @@ spec:
                         - 'visits-service:8082'
                         - 'vets-service:8083'
                         - 'admin-server:9090'
+              rule_files:
+                - /etc/config/alerting_rules.yml
             alerting_rules.yml: |-
               groups:
                 - name: request_error_alerts
@@ -48,8 +50,6 @@ spec:
                       annotations:
                         summary: "Tăng đột biến số lượng request lỗi ở job {{ $labels.job }}"
                         description: "Có hơn 10 request lỗi (5xx) trong 30 giây ở {{ $labels.job }}"
-            rule_files:
-              - /etc/config/alerting_rules.yml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
