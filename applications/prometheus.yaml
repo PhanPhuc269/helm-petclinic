@@ -21,6 +21,19 @@ spec:
             type: NodePort
             nodePort: 32001
           serverFiles:
+            prometheus.yml:
+              rule_files:
+                - "alerting_rules.yml"
+              scrape_configs:
+                - job_name: 'petclinic'
+                  metrics_path: '/actuator/prometheus'
+                  static_configs:
+                    - targets:
+                        - 'api-gateway:8080'
+                        - 'customers-service:8081'
+                        - 'visits-service:8082'
+                        - 'vets-service:8083'
+                        - 'admin-server:9090'
             alerting_rules.yml:
               groups:
                 - name: request_error_alerts
@@ -37,19 +50,6 @@ spec:
                       annotations:
                         summary: "Tăng đột biến số lượng request lỗi ở job {{ $labels.job }}"
                         description: "Có hơn 10 request lỗi (5xx) trong 30 giây ở {{ $labels.job }}"
-            prometheus.yml:
-              rule_files:
-                - "alerting_rules.yml"
-              scrape_configs:
-                - job_name: 'petclinic'
-                  metrics_path: '/actuator/prometheus'
-                  static_configs:
-                    - targets:
-                        - 'api-gateway:8080'
-                        - 'customers-service:8081'
-                        - 'visits-service:8082'
-                        - 'vets-service:8083'
-                        - 'admin-server:9090'
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
