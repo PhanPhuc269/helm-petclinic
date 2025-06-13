@@ -23,7 +23,7 @@ spec:
           serverFiles:
             prometheus.yml:
               rule_files:
-                - /etc/config/rules.yml
+                - /etc/config/rules
               scrape_configs:
                 - job_name: 'petclinic'
                   metrics_path: '/actuator/prometheus'
@@ -34,7 +34,7 @@ spec:
                         - 'visits-service:8082'
                         - 'vets-service:8083'
                         - 'admin-server:9090'
-            rules.yml:
+            rules: |
               groups:
                 - name: request_error_alerts
                   interval: 30s
