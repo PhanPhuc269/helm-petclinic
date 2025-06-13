@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: prometheus-rules
   namespace: monitoring
-labels:
-  role: alert-rules
-  app: prometheus
+  labels:
+    role: alert-rules
+    app: prometheus
 data:
   alerting_rules.yml: |
     groups:
