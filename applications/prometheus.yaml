@@ -22,6 +22,8 @@ spec:
             nodePort: 32001
           serverFiles:
             prometheus.yml:
+              rule_files:
+                - "alerting_rules.yml"
               scrape_configs:
                 - job_name: 'petclinic'
                   metrics_path: '/actuator/prometheus'
