@@ -7,7 +7,7 @@ metadata:
     role: alert-rules
     app: prometheus
 data:
-  alerting_rules.yaml: |
+  alerting_rules.yml: |
     groups:
       - name: request_error_alerts
         interval: 30s

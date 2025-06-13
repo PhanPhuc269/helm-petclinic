@@ -34,14 +34,14 @@ spec:
                         - 'admin-server:9090'
 
           additionalRulePaths:
-            - /etc/prometheus-rules
+            - /etc/config
           extraVolumes:
             - name: prometheus-rules
               configMap:
                 name: prometheus-rules
           extraVolumeMounts:
             - name: prometheus-rules
-              mountPath: /etc/prometheus-rules
+              mountPath: /etc/config
               readOnly: true
   destination:
     server: https://kubernetes.default.svc
