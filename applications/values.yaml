@@ -7,31 +7,51 @@ server:
   service:
     type: NodePort
     nodePort: 32001
-  serverFiles:
-    prometheus.yml:
-      scrape_configs:
-        - job_name: 'petclinic'
-          metrics_path: '/actuator/prometheus'
-          static_configs:
-            - targets:
-                - 'api-gateway:8080'
-                - 'customers-service:8081'
-                - 'visits-service:8082'
-                - 'vets-service:8083'
-                - 'admin-server:9090'
-    alerting_rules.yml: |
-      groups:
-        - name: request-error-alerts
-          interval: 30s
-          rules:
-            - alert: HighRequestErrorRate
-              expr: |
-                sum by (job) (
-                  rate(http_server_requests_seconds_count{status=~"5.."}[30s])
-                ) > 10
-              for: 30s
-              labels:
-                severity: critical
-              annotations:
-                summary: "Tăng đột biến số lượng request lỗi ở job {{ $labels.job }}"
-                description: "Có hơn 10 request lỗi (5xx) trong 30 giây ở {{ $labels.job }}"
+
+alertmanager:
+  enabled: true
+  config:
+    global:
+      resolve_timeout: 5m
+      smtp_smarthost: 'smtp.gmail.com:587'
+      smtp_from: 'php2692004@gmail.com'
+      smtp_auth_username: 'php2692004@gmail.com'
+      smtp_auth_password: 'ihpi harx gjpb nkhw'
+      smtp_require_tls: true
+    route:
+      receiver: 'gmail-notify'
+      group_wait: 10s
+      group_interval: 10s
+      repeat_interval: 1m
+    receivers:
+      - name: 'gmail-notify'
+        email_configs:
+          - to: 'php2692004@gmail.com'
+
+serverFiles:
+  alerting_rules.yml:
+    groups:
+    - name: 5xx-high-alert
+      rules:
+      - alert: High5xxErrors
+        expr: increase(http_server_requests_seconds_count{status=~"5.."}[30s]) > 20
+        labels:
+          severity: critical
+        annotations:
+          summary: "Tăng đột biến lỗi 5xx"
+          description: "Có hơn 10 request lỗi 5xx trong 30 giây (sau khi tổng hợp theo job)."
+  prometheus.yml:
+    rule_files:
+      - /etc/config/recording_rules.yml
+      - /etc/config/alerting_rules.yml
+    scrape_configs:
+      - job_name: 'petclinic'
+        metrics_path: '/actuator/prometheus'
+        static_configs:
+          - targets:
+              - 'api-gateway.dev:8080'
+              - 'customers-service.dev:8081'
+              - 'visits-service.dev:8082'
+              - 'vets-service.dev:8083'
+              - 'admin-server.dev:9090'
+  
