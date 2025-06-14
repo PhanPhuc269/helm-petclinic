@@ -8,13 +8,32 @@ spec:
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
-    targetRevision: 58.2.0 
+    targetRevision: 58.2.0
     helm:
       values: |
+        grafana:
+          enabled: false  # ❌ Tắt Grafana
+
+        alertmanager:
+          enabled: true   # ✅ Bật Alertmanager
+          alertmanagerSpec:
+            replicas: 1
+          ingress:
+            enabled: true
+            hosts:
+              - alertmanager.phanphuc.id.vn
+            ingressClassName: nginx
+
         prometheus:
+          enabled: true
+          service:
+            type: NodePort
+            nodePort: 32001
+            port: 9090
           prometheusSpec:
             serviceMonitorSelectorNilUsesHelmValues: false
             ruleSelectorNilUsesHelmValues: false
+
         additionalPrometheusRulesMap:
           high_request_errors:
             groups:
@@ -28,19 +47,6 @@ spec:
                     annotations:
                       summary: "High error rate detected"
                       description: "More than 10 error requests in 30 seconds on {{ $labels.instance }}"
-        grafana:
-          enabled: true
-          ingress:
-            enabled: true
-            hosts:
-              - grafana.phanphuc.id.vn
-            ingressClassName: nginx
-        alertmanager:
-          ingress:
-            enabled: true
-            hosts:
-              - alertmanager.phanphuc.id.vn
-            ingressClassName: nginx
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
