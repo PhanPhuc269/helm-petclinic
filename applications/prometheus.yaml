@@ -10,47 +10,9 @@ spec:
     chart: prometheus
     targetRevision: 27.20.0
     helm:
-      values: |
-        server:
-          ingress:
-            enabled: true
-            hosts:
-              - prometheus.phanphuc.id.vn
-            ingressClassName: nginx
-          service:
-            type: NodePort
-            nodePort: 32001
-          serverFiles:
-            prometheus.yml:
-              rule_files:
-                - /etc/config/alerting_rules.yml
-              scrape_configs:
-                - job_name: 'petclinic'
-                  metrics_path: '/actuator/prometheus'
-                  static_configs:
-                    - targets:
-                        - 'api-gateway:8080'
-                        - 'customers-service:8081'
-                        - 'visits-service:8082'
-                        - 'vets-service:8083'
-                        - 'admin-server:9090'
-            alerting_rules.yml: |
-              groups:
-                - name: request_error_alerts
-                  interval: 30s
-                  rules:
-                    - alert: HighRequestErrorRate
-                      expr: |
-                        sum by (job) (
-                          rate(http_server_requests_seconds_count{status=~"5.."}[30s])
-                        ) > 10
-                      for: 30s
-                      labels:
-                        severity: critical
-                      annotations:
-                        summary: "Tăng đột biến số lượng request lỗi ở job {{ $labels.job }}"
-                        description: "Có hơn 10 request lỗi (5xx) trong 30 giây ở {{ $labels.job }}"
-  destination:
+      valueFiles:
+        - values.yaml
+destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
   syncPolicy:
