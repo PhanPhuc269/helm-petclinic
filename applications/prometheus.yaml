@@ -23,7 +23,7 @@ spec:
           serverFiles:
             prometheus.yml:
               rule_files:
-                - /etc/config/rules1.yaml
+                - /etc/config/rules1.yml
               scrape_configs:
                 - job_name: 'petclinic'
                   metrics_path: '/actuator/prometheus'
