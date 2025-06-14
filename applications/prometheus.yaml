@@ -1,51 +1,46 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: prometheus-stack
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
-    chart: prometheus
-    targetRevision: 25.21.0
+    chart: kube-prometheus-stack
+    targetRevision: 58.2.0 
     helm:
       values: |
-        server:
-          additionalRuleConfigs:
-            - name: request-error-alerts
-              groups:
-                - name: request.error.rules
-                  rules:
-                    - alert: HighErrorRate
-                      expr: increase(http_requests_total{status=~"5.."}[30s]) > 10
-                      for: 0s
-                      labels:
-                        severity: warning
-                      annotations:
-                        summary: "High error rate detected"
-                        description: "More than 10 error requests in 30 seconds on {{ $labels.instance }}"
+        prometheus:
+          prometheusSpec:
+            serviceMonitorSelectorNilUsesHelmValues: false
+            ruleSelectorNilUsesHelmValues: false
+        additionalPrometheusRulesMap:
+          high_request_errors:
+            groups:
+              - name: request.error.rules
+                rules:
+                  - alert: HighErrorRate
+                    expr: increase(http_requests_total{status=~"5.."}[30s]) > 10
+                    for: 0s
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "High error rate detected"
+                      description: "More than 10 error requests in 30 seconds on {{ $labels.instance }}"
+        grafana:
+          enabled: true
           ingress:
             enabled: true
             hosts:
-              - prometheus.phanphuc.id.vn
+              - grafana.phanphuc.id.vn
             ingressClassName: nginx
-          service:
-            type: NodePort
-            nodePort: 32001
-          serverFiles:
-            prometheus.yml:
-              scrape_configs:
-                - job_name: 'petclinic'
-                  metrics_path: '/actuator/prometheus'
-                  static_configs:
-                    - targets:
-                        - 'api-gateway:8080'
-                        - 'customers-service:8081'
-                        - 'visits-service:8082'
-                        - 'vets-service:8083'
-                        - 'admin-server:9090'
-        
+        alertmanager:
+          ingress:
+            enabled: true
+            hosts:
+              - alertmanager.phanphuc.id.vn
+            ingressClassName: nginx
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
