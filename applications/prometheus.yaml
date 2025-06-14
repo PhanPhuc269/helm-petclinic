@@ -12,6 +12,19 @@ spec:
     helm:
       values: |
         server:
+          additionalRuleConfigs:
+            - name: request-error-alerts
+              groups:
+                - name: request.error.rules
+                  rules:
+                    - alert: HighErrorRate
+                      expr: increase(http_requests_total{status=~"5.."}[30s]) > 10
+                      for: 0s
+                      labels:
+                        severity: warning
+                      annotations:
+                        summary: "High error rate detected"
+                        description: "More than 10 error requests in 30 seconds on {{ $labels.instance }}"
           ingress:
             enabled: true
             hosts:
@@ -32,22 +45,7 @@ spec:
                         - 'visits-service:8082'
                         - 'vets-service:8083'
                         - 'admin-server:9090'
-        additionalRules:
-          - groups:
-              - name: request_error_alerts
-                interval: 30s
-                rules:
-                  - alert: HighRequestErrorRate
-                    expr: |
-                      sum by (job) (
-                        rate(http_server_requests_seconds_count{status=~"5.."}[30s])
-                      ) > 10
-                    for: 30s
-                    labels:
-                      severity: critical
-                    annotations:
-                      summary: "Tăng đột biến số lượng request lỗi ở job {{ $labels.job }}"
-                      description: "Có hơn 10 request lỗi (5xx) trong 30 giây ở {{ $labels.job }}"
+        
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
