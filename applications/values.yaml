@@ -16,7 +16,7 @@ alertmanager:
       smtp_smarthost: 'smtp.gmail.com:587'
       smtp_from: 'php2692004@gmail.com'
       smtp_auth_username: 'php2692004@gmail.com'
-      smtp_auth_password: 'ihpi harx gjpb nkhw'
+      smtp_auth_password: 'tgtm wreq zyzz yrxl'
       smtp_require_tls: true
     route:
       receiver: 'gmail-notify'
@@ -54,4 +54,3 @@ serverFiles:
               - 'visits-service.dev:8082'
               - 'vets-service.dev:8083'
               - 'admin-server.dev:9090'
-  
