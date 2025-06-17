@@ -94,7 +94,69 @@ spec:
                       "datasource": "Loki",
                       "targets": [
                         {
-                          "expr": "{}"
+                          "datasource": {
+                            "type": "loki",
+                            "uid": "P8E80F9AEF21F6940"
+                          },
+                          "editorMode": "code",
+                          "expr": "{app=\"api-gateway\"} |= ``",
+                          "queryType": "range",
+                          "refId": "A"
+                        },
+                        {
+                          "datasource": {
+                            "type": "loki",
+                            "uid": "P8E80F9AEF21F6940"
+                          },
+                          "editorMode": "builder",
+                          "expr": "{app=\"admin-server\"} |= ``",
+                          "hide": false,
+                          "queryType": "range",
+                          "refId": "B"
+                        },
+                        {
+                          "datasource": {
+                            "type": "loki",
+                            "uid": "P8E80F9AEF21F6940"
+                          },
+                          "editorMode": "builder",
+                          "expr": "{app=\"customers-service\"} |= ``",
+                          "hide": false,
+                          "queryType": "range",
+                          "refId": "C"
+                        },
+                        {
+                          "datasource": {
+                            "type": "loki",
+                            "uid": "P8E80F9AEF21F6940"
+                          },
+                          "editorMode": "builder",
+                          "expr": "{app=\"vets-service\"} |= ``",
+                          "hide": false,
+                          "queryType": "range",
+                          "refId": "D"
+                        },
+                        {
+                          "datasource": {
+                            "type": "loki",
+                            "uid": "P8E80F9AEF21F6940"
+                          },
+                          "editorMode": "builder",
+                          "expr": "{app=\"visits-service\"} |= ``",
+                          "hide": false,
+                          "queryType": "range",
+                          "refId": "E"
+                        },
+                        {
+                          "datasource": {
+                            "type": "loki",
+                            "uid": "P8E80F9AEF21F6940"
+                          },
+                          "editorMode": "builder",
+                          "expr": "{app=\"discovery-server\"} |= ``",
+                          "hide": false,
+                          "queryType": "range",
+                          "refId": "F"
                         }
                       ],
                       "gridPos": {
