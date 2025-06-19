@@ -37,6 +37,28 @@ spec:
                 url: http://prometheus-server.monitoring:80
                 isDefault: true
                 editable: true
+              - name: zipkin
+                type: zipkin
+                access: proxy
+                url: http://zipkin.monitoring:9411
+                isDefault: false
+                editable: true
+                uid: aepemvvhucw74f
+                jsonData:
+                  tracesToLogsV2:
+                    customQuery: true
+                    query: '{app=~".+"}  |= "${__trace.traceId}"'
+                    spanEndTimeShift: 1h
+                    spanStartTimeShift: -1h
+                  tracesToMetrics:
+                    queries:
+                      - name: Metrics
+                        query: http_server_requests_seconds_count
+                    spanEndTimeShift: 1h
+                    spanStartTimeShift: -1h
+                    tags:
+                      - key: app
+                        value: app
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
