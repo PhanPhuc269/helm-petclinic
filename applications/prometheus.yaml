@@ -52,7 +52,7 @@ spec:
                   severity: critical
                 annotations:
                   summary: "Tăng đột biến lỗi 5xx"
-                  description: "Có hơn 10 request lỗi 5xx trong 30 giây (sau khi tổng hợp theo job)."
+                  description: "Có hơn 10 request lỗi 5xx trong 30 giây."
           prometheus.yml:
             rule_files:
               - /etc/config/recording_rules.yml
