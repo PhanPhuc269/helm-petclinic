@@ -81,17 +81,6 @@ spec:
                   "uid": "petclinic-traffic-logs",
                   "schemaVersion": 16,
                   "version": 1,
-                  "templating": {
-                    "list": [
-                      {
-                        "name": "interval",
-                        "type": "interval",
-                        "label": "Khoảng thời gian",
-                        "query": "1m,5m,15m,1h,6h,1d",
-                        "current": { "text": "1m", "value": "1m" }
-                      }
-                    ]
-                  },
                   "panels": [
                     {
                       "type": "graph",
