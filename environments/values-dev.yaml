@@ -32,7 +32,7 @@ services:
       port: 8081
       targetPort: 8081
     image:
-      tag: 64c0bb9
+      tag: 4861bc0
 
   visits-service:
     enable: true
