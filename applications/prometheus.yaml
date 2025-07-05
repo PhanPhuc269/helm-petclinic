@@ -59,6 +59,7 @@ spec:
               - /etc/config/alerting_rules.yml
             scrape_configs:
               - job_name: 'petclinic'
+                scrape_interval: 15s    
                 metrics_path: '/actuator/prometheus'
                 static_configs:
                   - targets:
